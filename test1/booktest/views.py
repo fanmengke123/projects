@@ -19,3 +19,12 @@ def index(request):
     }
     # 返回并渲染模板
     return HttpResponse(template.render(ctx))
+
+
+def show(request, bid):
+    book = BookInfo.objects.get(id=bid)
+    list = book.heroinfo_set.all()
+    ctx = {
+        'list': list
+    }
+    return render(request, 'booktest/show.html', ctx)

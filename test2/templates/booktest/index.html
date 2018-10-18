@@ -6,14 +6,16 @@
 </head>
 <body>
 
+<h1>哈哈</h1>
 <ul>
     {% for book in list %}
-        <li><a href="{{ book.id }}/">{{ book.btitle }}</a></li>
-
+        <li>{{ book.btitle }} <a href="/delete{{ book.id }}/">删除</a></li>
     {% endfor %}
 
-
 </ul>
-</body>
-</html>
 
+<a href="/create/">创建</a>
+</body>
+
+
+</html>

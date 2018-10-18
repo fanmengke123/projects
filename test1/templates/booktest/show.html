@@ -6,14 +6,12 @@
 </head>
 <body>
 
+
 <ul>
-    {% for book in list %}
-        <li><a href="{{ book.id }}/">{{ book.btitle }}</a></li>
-
+    {% for hero in list %}
+        <li>{{ hero.hname }}</li>
     {% endfor %}
-
 
 </ul>
 </body>
 </html>
-
