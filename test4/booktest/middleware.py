@@ -4,6 +4,9 @@ from django.http import HttpResponse
 
 class mid(MiddlewareMixin):
 
+    def __init__(self,response):
+        super().__init__(response)
+
     def process_request(self, request):
         print('--------------request')
         # 发现非正常的访问

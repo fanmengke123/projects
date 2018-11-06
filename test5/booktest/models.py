@@ -1,4 +1,7 @@
 from django.db import models
+from tinymce.models import HTMLField
+
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.
@@ -53,3 +56,12 @@ class PicTest(models.Model):
 class AreaInfo(models.Model):
     name = models.CharField(max_length=20)
     parent = models.ForeignKey('self', blank=True, null=True)
+
+
+class GoodsInfo(models.Model):
+    gcontent = HTMLField()  # 描述信息
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=20)
+    content = RichTextUploadingField()

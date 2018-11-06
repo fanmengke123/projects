@@ -35,7 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'booktest'
+    'booktest',
+    'tinymce',
+    'ckeditor',
+    'ckeditor_uploader',
+    'haystack',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -122,5 +127,54 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
 
-MEDIA_ROOT=os.path.join(BASE_DIR,"static/media")
+# 富文本配置
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}
+MEDIA_URL = '/media/'
+# 放在django项目根目录，同时也需要创建media文件夹
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = 'upload/'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 使用whoosh引擎
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        # 索引文件路径
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+# 当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# celery
+import djcelery
+
+djcelery.setup_loader()
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+#发送邮件的邮箱
+EMAIL_HOST_USER = 'jikedaohang@163.com'
+#在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = '123456abc'
+#收件人看到的发件人
+EMAIL_FROM = 'python<jikedaohang@163.com>'
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "localhost:6379",
+        'TIMEOUT': 60,
+    },
+}

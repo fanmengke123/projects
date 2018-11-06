@@ -39,3 +39,8 @@ class HeroInfoAdmin(admin.ModelAdmin):
 
 # admin.site.register(HeroInfo)
 admin.site.register(PicTest)
+
+# 注册商品类
+admin.site.register(GoodsInfo)
+
+admin.site.register(Blog)
